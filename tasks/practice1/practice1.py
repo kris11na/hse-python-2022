@@ -8,9 +8,9 @@ def concatenate_strings(a: str, b: str) -> str:
     :return: результат сложения
     """
 
-    result = a + b
 
-    return result
+
+    return a+b
 
 
 def calculate_salary(total_compensation: int) -> float:
