@@ -40,4 +40,20 @@ def search_phone(content: Any, name: str) -> Optional[str]:
 
     # пиши свой код здесь
 
-    return None
+    content = [content]
+    number = None
+    while content:
+        num = content.pop(0)
+        if isinstance(num, dict):
+            for key in num.keys():
+                if key == 'name' and num[key] == name:
+                    number = num['phone']
+                else:
+                    content.append(num[key])
+
+        elif isinstance(num, list):
+            for i in num:
+                content.append(i)
+
+    return number
+
