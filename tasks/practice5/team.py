@@ -26,6 +26,9 @@ class Team:
         Конструктор должен присвоить значения публичным атрибутам
         и инициализировать контейнер `__members`
         """
+        self.name = name
+        self.manager = manager
+        self.__members = set()
 
         # пиши свой код здесь
 
@@ -34,6 +37,10 @@ class Team:
         Задача: реализовать метод добавления участника в команду.
         Добавить можно только работника.
         """
+        if not isinstance(member, Employee):
+            raise TypeError
+
+        self.__members.add(member)
 
         # пиши свой код здесь
 
@@ -44,13 +51,23 @@ class Team:
         """
 
         # пиши свой код здесь
+        if not isinstance(member, Employee):
+            raise TypeError
+
+        if member not in self.__members:
+            raise NoSuchMemberError(self.name, member)
+        self.__members.remove(member)
 
     def get_members(self) -> Set[Employee]:
         """
         Задача: реализовать метод возвращения списка участков команды та,
         чтобы из вне нельзя было поменять список участников внутри класса
         """
+        tmp = self.__members.copy()
+        return tmp
 
+    def __str__(self) -> str:
+        return f'team: {self.name} manager: {self.manager.name} number of members: {len(self.get_members())}'
         # пиши свой код здесь
 
     def show(self) -> None:
